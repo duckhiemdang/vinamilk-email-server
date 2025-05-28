@@ -2,23 +2,62 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Note: Using a Set in serverless functions is problematic as it resets on each invocation
+// Consider using a database or external storage for production
 const usedEmails = new Set();
 
 export default async function handler(req, res) {
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: { message: 'Method not allowed' } });
   }
 
   try {
-    const { name, email, language, fullname } = req.body;
+    // Add detailed logging
+    console.log('Request received:', {
+      method: req.method,
+      headers: req.headers,
+      body: req.body
+    });
 
-    if (!name || !email || !language || !fullname) {
-      return res.status(400).json({ 
-        error: { message: 'Missing required fields' } 
+    // Check if RESEND_API_KEY is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured');
+      return res.status(500).json({ 
+        error: { message: 'Email service not configured' } 
       });
     }
 
+    const { name, email, language, fullname } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !language || !fullname) {
+      console.error('Missing required fields:', { name, email, language, fullname });
+      return res.status(400).json({ 
+        error: { message: 'Missing required fields: name, email, language, fullname are required' } 
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ 
+        error: { message: 'Invalid email format' } 
+      });
+    }
+
+    // Check if email was already used (Note: this won't work across serverless invocations)
     if (usedEmails.has(email.toLowerCase())) {
+      console.log('Email already used:', email);
       return res.status(400).json({ 
         error: { message: 'Email already used' } 
       });
@@ -119,6 +158,8 @@ export default async function handler(req, res) {
     </body>
     </html>`;
 
+    console.log('Attempting to send email to:', email);
+
     const result = await resend.emails.send({
       from: 'Vinamilk GTP 2025 <onboarding@resend.dev>',
       to: [email],
@@ -126,6 +167,9 @@ export default async function handler(req, res) {
       html: htmlContent,
     });
 
+    console.log('Email sent successfully:', result);
+
+    // Add email to used set (Note: this won't persist across serverless invocations)
     usedEmails.add(email.toLowerCase());
 
     return res.status(200).json({ 
@@ -135,8 +179,18 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Email sending error:', error);
+    
+    // Provide more specific error messages
+    let errorMessage = 'Failed to send email';
+    if (error.message) {
+      errorMessage = error.message;
+    }
+    
     return res.status(500).json({ 
-      error: { message: 'Failed to send email' } 
+      error: { 
+        message: errorMessage,
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      } 
     });
   }
 }
