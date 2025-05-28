@@ -82,7 +82,7 @@ const htmlContent = `
 
     <!-- Header Image -->
     <div style="background-color: #FFFFF1;">
-      <img src="https://your-vercel-domain.vercel.app/header.png" alt="Vinamilk Header" style="width: 100%; max-width: 600px; display: block;" />
+      <img src="https://vinamilk-email-server.vercel.app//header.png" alt="Vinamilk Header" style="width: 100%; max-width: 600px; display: block;" />
     </div>
 
     <!-- Email Content -->
