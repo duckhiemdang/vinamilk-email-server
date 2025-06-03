@@ -147,7 +147,7 @@ const htmlContent = `
     console.log('Attempting to send email to:', email);
 
     const result = await resend.emails.send({
-      from: 'Vinamilk GTP 2025 <vcogroupyoungtalenttest.com>',
+      from: 'noreply@vcogroupyoungtalenttest.com',
       to: [email],
       subject: subject,
       html: htmlContent,
