@@ -1,10 +1,33 @@
 import { Resend } from 'resend';
+import admin from 'firebase-admin';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Note: Using a Set in serverless functions is problematic as it resets on each invocation
-// Consider using a database or external storage for production
-const usedEmails = new Set();
+// Initialize Firebase Admin
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    }),
+    databaseURL: 'https://vinamilk-3c5bf-default-rtdb.asia-southeast1.firebasedatabase.app',
+  });
+}
+
+const db = admin.database();
+
+async function checkEmailExists(email) {
+  try {
+    const contestantsRef = db.ref('contestant');
+    const snapshot = await contestantsRef.orderByChild('personalInfo/email').equalTo(email.toLowerCase()).once('value');
+    return snapshot.exists();
+  } catch (error) {
+    console.error('Error checking email in Firebase:', error);
+    // In case of Firebase error, allow the request to proceed rather than blocking it
+    return false;
+  }
+}
 
 export default async function handler(req, res) {
   // Add CORS headers
@@ -37,6 +60,14 @@ export default async function handler(req, res) {
       });
     }
 
+    // Check if Firebase credentials are configured
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_PRIVATE_KEY || !process.env.FIREBASE_CLIENT_EMAIL) {
+      console.error('Firebase credentials not configured');
+      return res.status(500).json({ 
+        error: { message: 'Database service not configured' } 
+      });
+    }
+
     const { name, email, language, fullname } = req.body;
 
     // Validate required fields
@@ -55,8 +86,10 @@ export default async function handler(req, res) {
       });
     }
 
-    // Check if email was already used (Note: this won't work across serverless invocations)
-    if (usedEmails.has(email.toLowerCase())) {
+    // Check if email already exists in Firebase
+    console.log('Checking if email exists in Firebase:', email);
+    const emailExists = await checkEmailExists(email);
+    if (emailExists) {
       console.log('Email already used:', email);
       return res.status(400).json({ 
         error: { message: 'Email already used' } 
@@ -142,8 +175,6 @@ const htmlContent = `
 </html>
 `;
 
-
-
     console.log('Attempting to send email to:', email);
 
     const result = await resend.emails.send({
@@ -154,9 +185,6 @@ const htmlContent = `
     });
 
     console.log('Email sent successfully:', result);
-
-    // Add email to used set (Note: this won't persist across serverless invocations)
-    usedEmails.add(email.toLowerCase());
 
     return res.status(200).json({ 
       success: true, 
