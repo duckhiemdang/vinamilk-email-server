@@ -228,7 +228,7 @@ const htmlContent = `
     console.log('Attempting to send email to:', email);
 
     const result = await resend.emails.send({
-      from: 'Vinamilk Graduate Talent 2025 <noreply@vcogroup.com.vn>',
+      from: 'Vinamilk Graduate Talent Program 2025 <noreply@vcogroup.com.vn>',
       to: [email],
       subject: subject,
       html: htmlContent,
