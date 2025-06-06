@@ -110,7 +110,7 @@ const htmlContent = `
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${subject}</title>
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; color: #333;">
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #FFFFF1; margin: 0; padding: 20px; color: #333;">
   <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
     <!-- Header Banner -->
@@ -200,7 +200,7 @@ const htmlContent = `
         
         <div style="margin: 20px 0;">
           <img src="https://vinamilk-email-server.vercel.app/logo.png" alt="Vinamilk Logo" style="height: 40px; margin-bottom: 10px;" />
-          <p style="font-size: 14px; margin: 5px 0; font-weight: bold; color: #4472C4;">
+          <p style="font-size: 14px; margin: 5px 0; font-weight: bold; color: #0213b0;">
             ${isVietnamese ? 'Đội tổ chức Chương trình Graduate Talent Program' : 'Graduate Talent Program Organizing Team'}
           </p>
         </div>
@@ -208,9 +208,9 @@ const htmlContent = `
         <div style="font-size: 12px; color: #777; margin-top: 15px;">
           <p style="margin: 2px 0;">10 Tan Trao St, Tan Phu Ward, District 7, Ho Chi Minh City, Vietnam</p>
           <p style="margin: 2px 0;">
-            <a href="https://new.vinamilk.com.vn/about-us" style="color: #4472C4; text-decoration: none; margin-right: 10px;">Website</a>
-            <a href="https://www.linkedin.com/company/vinamilk/" style="color: #4472C4; text-decoration: none; margin-right: 10px;">LinkedIn</a>
-            <a href="https://www.facebook.com/vinamilkofficial" style="color: #4472C4; text-decoration: none;">Facebook</a>
+            <a href="https://new.vinamilk.com.vn/about-us" style="color: #0213b0; text-decoration: none; margin-right: 10px;">Website</a>
+            <a href="https://www.linkedin.com/company/vinamilk/" style="color: #0213b0; text-decoration: none; margin-right: 10px;">LinkedIn</a>
+            <a href="https://www.facebook.com/vinamilkofficial" style="color: #0213b0; text-decoration: none;">Facebook</a>
           </p>
           <p style="margin: 10px 0 0 0; font-style: italic;">
             ${isVietnamese 
