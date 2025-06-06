@@ -100,7 +100,7 @@ export default async function handler(req, res) {
     
     const subject = isVietnamese 
       ? 'Xác nhận ứng tuyển - Chương trình GTP 2025'
-      : 'Application Confirmation - GTP 2025 Program';
+      : 'Application Confirmation - Vinamilk Graduate Talent Program 2025';
 
 const htmlContent = `
 <!DOCTYPE html>
@@ -110,64 +110,115 @@ const htmlContent = `
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${subject}</title>
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #FFFFF1; margin: 0; padding: 0; color: #333;">
-  <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; color: #333;">
+  <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
-    <!-- Header Image -->
-    <div style="background-color: #FFFFF1;">
-      <img src="https://vinamilk-email-server.vercel.app//header.png" alt="Vinamilk Header" style="width: 100%; max-width: 600px; display: block;" />
+    <!-- Header Banner -->
+    <div style="background-color: #4472C4;">
+      <img src="https://vinamilk-email-server.vercel.app/header.png" alt="Graduate Talent Program 2025" style="width: 100%; max-width: 600px; display: block;" />
     </div>
 
     <!-- Email Content -->
     <div style="padding: 30px;">
-      <p style="font-size: 18px;">${isVietnamese ? `Chào ${name},` : `Dear ${name},`}</p>
+      <p style="font-size: 16px; margin-bottom: 20px;">${isVietnamese ? `Chào ${name},` : `Dear ${name},`}</p>
 
-      <p style="font-size: 16px; line-height: 1.6;">
+      <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
         ${isVietnamese 
-          ? 'Cảm ơn bạn đã ứng tuyển vào Chương trình GTP 2025 của Vinamilk. Chúng tôi đã nhận được hồ sơ ứng tuyển của bạn.'
-          : 'Thank you for applying to Vinamilk\'s GTP 2025 Program. We have received your application successfully.'}
+          ? 'Cảm ơn bạn đã ứng tuyển vào Chương trình Graduate Talent Program 2025 của Vinamilk. Chúng tôi rất vui mừng xác nhận rằng hồ sơ ứng tuyển của bạn đã được nộp thành công.'
+          : 'Thank you for applying to Vinamilk Graduate Talent Program 2025. We\'re pleased to confirm that your application has been successfully submitted.'}
       </p>
 
-      <!-- Application Info Box -->
-      <div style="background: #f4f7ff; border-left: 4px solid #0213b0; padding: 20px; margin: 20px 0; border-radius: 8px;">
-        <h3 style="margin-top: 0; font-size: 16px; color: #0213b0;">${isVietnamese ? 'Thông tin ứng tuyển' : 'Application Details'}</h3>
-        <p><strong>${isVietnamese ? 'Họ và tên:' : 'Full Name:'}</strong> ${fullname}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>${isVietnamese ? 'Thời gian nộp:' : 'Submitted:'}</strong> ${new Date().toLocaleDateString(isVietnamese ? 'vi-VN' : 'en-US')}</p>
-      </div>
-
-      <!-- Next Steps -->
-      <div style="background: #fff9e6; padding: 20px; border: 1px solid #ffecb3; border-radius: 8px;">
-        <h4 style="margin-top: 0; color: #8a6d3b;">🔔 ${isVietnamese ? 'Các bước tiếp theo' : 'Next Steps'}</h4>
-        <ul style="padding-left: 20px; color: #6d4c41;">
-          <li>${isVietnamese 
-            ? 'Chúng tôi sẽ xem xét hồ sơ của bạn trong vòng 7–10 ngày làm việc.'
-            : 'We will review your application within 7–10 business days.'}</li>
-          <li>${isVietnamese 
-            ? 'Nếu hồ sơ phù hợp, chúng tôi sẽ liên hệ qua email này để thông báo bước tiếp theo.'
-            : 'If shortlisted, we will contact you via this email for the next steps.'}</li>
+      <!-- Application Details Box -->
+      <div style="border: 2px solid #4472C4; padding: 20px; margin: 25px 0; border-radius: 4px;">
+        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #4472C4; font-weight: bold;">${isVietnamese ? 'Thông tin ứng tuyển' : 'Application Details'}</h3>
+        <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+          <li style="margin-bottom: 8px;"><strong>${isVietnamese ? 'Họ và tên:' : 'Full Name:'}</strong> ${fullname}</li>
+          <li style="margin-bottom: 8px;"><strong>Email:</strong> ${email}</li>
+          <li style="margin-bottom: 0;"><strong>${isVietnamese ? 'Thời gian nộp:' : 'Submitted:'}</strong> ${new Date().toLocaleDateString(isVietnamese ? 'vi-VN' : 'en-US')}</li>
         </ul>
       </div>
 
-      <p style="margin-top: 20px; font-size: 16px;">
+      <!-- What happens next section -->
+      <div style="margin: 25px 0;">
+        <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;">
+          <span style="margin-right: 8px;">⚠️</span>${isVietnamese ? 'Các bước tiếp theo là gì?' : 'What happens next?'}
+        </h4>
+        
+        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
+          ${isVietnamese 
+            ? 'Những ứng viên vượt qua vòng sàng lọc sẽ tiến tới bài Kiểm tra Năng lực, được lên lịch như sau:'
+            : 'Candidates who pass the screening round will proceed to the Aptitude Test, scheduled as follows:'}
+        </p>
+
+        <ul style="font-size: 14px; margin: 15px 0; padding-left: 20px;">
+          <li style="margin-bottom: 8px;">
+            <strong>${isVietnamese ? 'Kiểm tra Năng lực – Đợt 1:' : 'Aptitude Test – Batch 1:'}</strong> 
+            ${isVietnamese ? '21–23 tháng 6, 2025' : 'June 21–23, 2025'}
+          </li>
+          <li style="margin-bottom: 0;">
+            <strong>${isVietnamese ? 'Kiểm tra Năng lực – Đợt 2:' : 'Aptitude Test – Batch 2:'}</strong> 
+            ${isVietnamese ? '12–15 tháng 7, 2025' : 'July 12–15, 2025'}
+          </li>
+        </ul>
+
+        <p style="font-size: 14px; color: #d9534f; margin-top: 15px;">
+          <span style="margin-right: 5px;">📍</span>
+          ${isVietnamese 
+            ? 'Vui lòng sắp xếp lịch cá nhân để tham gia Kiểm tra Năng lực với Vinamilk trong thời gian tương ứng.'
+            : 'Please arrange your personal schedule to participate in the Aptitude Test with Vinamilk during the respective period.'}
+        </p>
+      </div>
+
+      <!-- Contact Information -->
+      <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0;">
         ${isVietnamese 
-          ? 'Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ lại qua email này.'
-          : 'If you have any questions, feel free to reach out via this email.'}
+          ? 'Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ qua:'
+          : 'If you have any questions, feel free to reach out via:'}
       </p>
 
-      <!-- Closing -->
-      <p style="text-align: center; font-weight: bold; color: #0213b0; font-size: 18px; margin-top: 30px;">
-        ${isVietnamese ? 'Chúc bạn may mắn!' : 'Wishing you the best of luck!'}
+      <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
+        <li style="margin-bottom: 8px;">
+          <span style="background-color: #ffff00; padding: 2px 4px; border-radius: 2px;"><strong>Email:</strong></span> 
+          graduatetalent@vinamilk.com.vn
+        </li>
+        <li style="margin-bottom: 0;">
+          <strong>Facebook:</strong> facebook.com/LifeAtVinamilk
+        </li>
+      </ul>
+
+      <!-- Closing Message -->
+      <p style="font-size: 14px; margin-bottom: 30px;">
+        ${isVietnamese 
+          ? 'Chúng tôi đánh giá cao sự quan tâm của bạn và chúc bạn may mắn nhất!'
+          : 'We appreciate your interest and wish you the very best!'}
       </p>
 
-      <!-- Divider -->
-      <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0 20px;">
-
-      <!-- Footer -->
-      <div style="text-align: center; font-size: 13px; color: #777;">
-        <p style="margin: 4px 0;"><strong>Vinamilk - Vietnam Dairy Products Joint Stock Company</strong></p>
-        <p style="margin: 4px 0;">Email: hr@vinamilk.com.vn</p>
-        <p style="margin: 4px 0;">Website: <a href="https://vinamilk.com.vn" style="color: #0213b0; text-decoration: none;">vinamilk.com.vn</a></p>
+      <!-- Footer with Logo -->
+      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+        <p style="font-size: 14px; margin-bottom: 10px;">
+          ${isVietnamese ? 'Trân trọng,' : 'Warm regards,'}
+        </p>
+        
+        <div style="margin: 20px 0;">
+          <img src="https://vinamilk-email-server.vercel.app/logo.png" alt="Vinamilk Logo" style="height: 40px; margin-bottom: 10px;" />
+          <p style="font-size: 14px; margin: 5px 0; font-weight: bold; color: #4472C4;">
+            ${isVietnamese ? 'Đội tổ chức Chương trình Graduate Talent Program' : 'Graduate Talent Program Organizing Team'}
+          </p>
+        </div>
+        
+        <div style="font-size: 12px; color: #777; margin-top: 15px;">
+          <p style="margin: 2px 0;">10 Tan Trao St, Tan Phu Ward, District 7, Ho Chi Minh City, Vietnam</p>
+          <p style="margin: 2px 0;">
+            <a href="#" style="color: #4472C4; text-decoration: none; margin-right: 10px;">Website</a>
+            <a href="#" style="color: #4472C4; text-decoration: none; margin-right: 10px;">LinkedIn</a>
+            <a href="#" style="color: #4472C4; text-decoration: none;">Facebook</a>
+          </p>
+          <p style="margin: 10px 0 0 0; font-style: italic;">
+            ${isVietnamese 
+              ? 'Cảm ơn bạn đã cân nhắc tác động môi trường khi in email này.'
+              : 'Thank you for considering the environmental impact of printing this email.'}
+          </p>
+        </div>
       </div>
     </div>
   </div>
