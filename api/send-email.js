@@ -141,7 +141,7 @@ const htmlContent = `
       <!-- What happens next section -->
       <div style="margin: 25px 0;">
         <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;">
-          <span style="margin-right: 8px;">⚠️</span>${isVietnamese ? 'Các bước tiếp theo là gì?' : 'What happens next?'}
+          <span style="margin-right: 8px;">🔔</span>${isVietnamese ? 'Các bước tiếp theo là gì?' : 'What happens next?'}
         </h4>
         
         <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
@@ -178,8 +178,7 @@ const htmlContent = `
 
       <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
         <li style="margin-bottom: 8px;">
-          <span style="background-color: #ffff00; padding: 2px 4px; border-radius: 2px;"><strong>Email:</strong></span> 
-          graduatetalent@vinamilk.com.vn
+          <strong>Email:</strong> graduatetalent@vinamilk.com.vn
         </li>
         <li style="margin-bottom: 0;">
           <strong>Facebook:</strong> facebook.com/LifeAtVinamilk
@@ -209,9 +208,9 @@ const htmlContent = `
         <div style="font-size: 12px; color: #777; margin-top: 15px;">
           <p style="margin: 2px 0;">10 Tan Trao St, Tan Phu Ward, District 7, Ho Chi Minh City, Vietnam</p>
           <p style="margin: 2px 0;">
-            <a href="#" style="color: #4472C4; text-decoration: none; margin-right: 10px;">Website</a>
-            <a href="#" style="color: #4472C4; text-decoration: none; margin-right: 10px;">LinkedIn</a>
-            <a href="#" style="color: #4472C4; text-decoration: none;">Facebook</a>
+            <a href="https://new.vinamilk.com.vn/about-us" style="color: #4472C4; text-decoration: none; margin-right: 10px;">Website</a>
+            <a href="https://www.linkedin.com/company/vinamilk/" style="color: #4472C4; text-decoration: none; margin-right: 10px;">LinkedIn</a>
+            <a href="https://www.facebook.com/vinamilkofficial" style="color: #4472C4; text-decoration: none;">Facebook</a>
           </p>
           <p style="margin: 10px 0 0 0; font-style: italic;">
             ${isVietnamese 
@@ -229,7 +228,7 @@ const htmlContent = `
     console.log('Attempting to send email to:', email);
 
     const result = await resend.emails.send({
-      from: 'noreply@vcogroupyoungtalenttest.com',
+      from: 'Vinamilk Graduate Talent 2025 <noreply@vcogroup.com.vn>',
       to: [email],
       subject: subject,
       html: htmlContent,
