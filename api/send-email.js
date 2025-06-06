@@ -114,7 +114,7 @@ const htmlContent = `
   <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
     <!-- Header Banner -->
-    <div style="background-color: #4472C4;">
+    <div style="background-color: #0213b0;">
       <img src="https://vinamilk-email-server.vercel.app/header.png" alt="Graduate Talent Program 2025" style="width: 100%; max-width: 600px; display: block;" />
     </div>
 
@@ -129,8 +129,8 @@ const htmlContent = `
       </p>
 
       <!-- Application Details Box -->
-      <div style="border: 2px solid #4472C4; padding: 20px; margin: 25px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #4472C4; font-weight: bold;">${isVietnamese ? 'Thông tin ứng tuyển' : 'Application Details'}</h3>
+      <div style="border: 2px solid #0213b0; padding: 20px; margin: 25px 0; border-radius: 4px;">
+        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #0213b0; font-weight: bold;">${isVietnamese ? 'Thông tin ứng tuyển' : 'Application Details'}</h3>
         <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
           <li style="margin-bottom: 8px;"><strong>${isVietnamese ? 'Họ và tên:' : 'Full Name:'}</strong> ${fullname}</li>
           <li style="margin-bottom: 8px;"><strong>Email:</strong> ${email}</li>
