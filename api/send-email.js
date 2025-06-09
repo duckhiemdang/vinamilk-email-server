@@ -17,15 +17,19 @@ if (!admin.apps.length) {
 
 const db = admin.database();
 
-async function checkEmailExists(email) {
-  try {
-    const contestantsRef = db.ref('contestant');
-    const snapshot = await contestantsRef.orderByChild('personalInfo/email').equalTo(email.toLowerCase()).once('value');
-    return snapshot.exists();
-  } catch (error) {
-    console.error('Error checking email in Firebase:', error);
-    // In case of Firebase error, allow the request to proceed rather than blocking it
-    return false;
+async function checkEmailExists(email, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const contestantsRef = db.ref('contestant');
+      const snapshot = await contestantsRef.orderByChild('personalInfo/email').equalTo(email.toLowerCase()).once('value');
+      return snapshot.exists();
+    } catch (error) {
+      console.error(`Firebase check attempt ${i + 1} failed:`, error);
+      if (i === retries) {
+        throw error; // Let it fail properly on final attempt
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1s before retry
+    }
   }
 }
 
@@ -55,16 +59,16 @@ export default async function handler(req, res) {
     // Check if RESEND_API_KEY is configured
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not configured');
-      return res.status(500).json({ 
-        error: { message: 'Email service not configured' } 
+      return res.status(500).json({
+        error: { message: 'Email service not configured' }
       });
     }
 
     // Check if Firebase credentials are configured
     if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_PRIVATE_KEY || !process.env.FIREBASE_CLIENT_EMAIL) {
       console.error('Firebase credentials not configured');
-      return res.status(500).json({ 
-        error: { message: 'Database service not configured' } 
+      return res.status(500).json({
+        error: { message: 'Database service not configured' }
       });
     }
 
@@ -73,16 +77,16 @@ export default async function handler(req, res) {
     // Validate required fields
     if (!name || !email || !language || !fullname) {
       console.error('Missing required fields:', { name, email, language, fullname });
-      return res.status(400).json({ 
-        error: { message: 'Missing required fields: name, email, language, fullname are required' } 
+      return res.status(400).json({
+        error: { message: 'Missing required fields: name, email, language, fullname are required' }
       });
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ 
-        error: { message: 'Invalid email format' } 
+      return res.status(400).json({
+        error: { message: 'Invalid email format' }
       });
     }
 
@@ -91,18 +95,18 @@ export default async function handler(req, res) {
     const emailExists = await checkEmailExists(email);
     if (emailExists) {
       console.log('Email already used:', email);
-      return res.status(400).json({ 
-        error: { message: 'Email already used' } 
+      return res.status(400).json({
+        error: { message: 'Email already used' }
       });
     }
 
     const isVietnamese = language === 'vi';
-    
-    const subject = isVietnamese 
+
+    const subject = isVietnamese
       ? 'Xác nhận ứng tuyển - Chương trình GTP 2025'
       : 'Application Confirmation - Vinamilk Graduate Talent Program 2025';
 
-const htmlContent = `
+    const htmlContent = `
 <!DOCTYPE html>
 <html lang="${isVietnamese ? 'vi' : 'en'}">
 <head>
@@ -123,9 +127,9 @@ const htmlContent = `
       <p style="font-size: 16px; margin-bottom: 20px;">${isVietnamese ? `Chào ${name},` : `Dear ${name},`}</p>
 
       <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-        ${isVietnamese 
-          ? 'Cảm ơn bạn đã ứng tuyển vào Chương trình Graduate Talent Program 2025 của Vinamilk. Chúng tôi rất vui mừng xác nhận rằng hồ sơ ứng tuyển của bạn đã được nộp thành công.'
-          : 'Thank you for applying to Vinamilk Graduate Talent Program 2025. We\'re pleased to confirm that your application has been successfully submitted.'}
+        ${isVietnamese
+        ? 'Cảm ơn bạn đã ứng tuyển vào Chương trình Graduate Talent Program 2025 của Vinamilk. Chúng tôi rất vui mừng xác nhận rằng hồ sơ ứng tuyển của bạn đã được nộp thành công.'
+        : 'Thank you for applying to Vinamilk Graduate Talent Program 2025. We\'re pleased to confirm that your application has been successfully submitted.'}
       </p>
 
       <!-- Application Details Box -->
@@ -145,9 +149,9 @@ const htmlContent = `
         </h4>
         
         <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
-          ${isVietnamese 
-            ? 'Những ứng viên vượt qua vòng sàng lọc sẽ tiến tới bài Kiểm tra Năng lực, được lên lịch như sau:'
-            : 'Candidates who pass the screening round will proceed to the Aptitude Test, scheduled as follows:'}
+          ${isVietnamese
+        ? 'Những ứng viên vượt qua vòng sàng lọc sẽ tiến tới bài Kiểm tra Năng lực, được lên lịch như sau:'
+        : 'Candidates who pass the screening round will proceed to the Aptitude Test, scheduled as follows:'}
         </p>
 
         <ul style="font-size: 14px; margin: 15px 0; padding-left: 20px;">
@@ -163,17 +167,17 @@ const htmlContent = `
 
         <p style="font-size: 14px; color: #d9534f; margin-top: 15px;">
           <span style="margin-right: 5px;">📍</span>
-          ${isVietnamese 
-            ? 'Vui lòng sắp xếp lịch cá nhân để tham gia Kiểm tra Năng lực với Vinamilk trong thời gian tương ứng.'
-            : 'Please arrange your personal schedule to participate in the Aptitude Test with Vinamilk during the respective period.'}
+          ${isVietnamese
+        ? 'Vui lòng sắp xếp lịch cá nhân để tham gia Kiểm tra Năng lực với Vinamilk trong thời gian tương ứng.'
+        : 'Please arrange your personal schedule to participate in the Aptitude Test with Vinamilk during the respective period.'}
         </p>
       </div>
 
       <!-- Contact Information -->
       <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0;">
-        ${isVietnamese 
-          ? 'Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ qua:'
-          : 'If you have any questions, feel free to reach out via:'}
+        ${isVietnamese
+        ? 'Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ qua:'
+        : 'If you have any questions, feel free to reach out via:'}
       </p>
 
       <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
@@ -187,9 +191,9 @@ const htmlContent = `
 
       <!-- Closing Message -->
       <p style="font-size: 14px; margin-bottom: 30px;">
-        ${isVietnamese 
-          ? 'Chúng tôi đánh giá cao sự quan tâm của bạn và chúc bạn may mắn nhất!'
-          : 'We appreciate your interest and wish you the very best!'}
+        ${isVietnamese
+        ? 'Chúng tôi đánh giá cao sự quan tâm của bạn và chúc bạn may mắn nhất!'
+        : 'We appreciate your interest and wish you the very best!'}
       </p>
 
       <!-- Footer with Logo -->
@@ -213,9 +217,9 @@ const htmlContent = `
             <a href="https://www.facebook.com/vinamilkofficial" style="color: #0213b0; text-decoration: none;">Facebook</a>
           </p>
           <p style="margin: 10px 0 0 0; font-style: italic;">
-            ${isVietnamese 
-              ? 'Cảm ơn bạn đã cân nhắc tác động môi trường khi in email này.'
-              : 'Thank you for considering the environmental impact of printing this email.'}
+            ${isVietnamese
+        ? 'Cảm ơn bạn đã cân nhắc tác động môi trường khi in email này.'
+        : 'Thank you for considering the environmental impact of printing this email.'}
           </p>
         </div>
       </div>
@@ -236,25 +240,25 @@ const htmlContent = `
 
     console.log('Email sent successfully:', result);
 
-    return res.status(200).json({ 
-      success: true, 
-      messageId: result.data?.id 
+    return res.status(200).json({
+      success: true,
+      messageId: result.data?.id
     });
 
   } catch (error) {
     console.error('Email sending error:', error);
-    
+
     // Provide more specific error messages
     let errorMessage = 'Failed to send email';
     if (error.message) {
       errorMessage = error.message;
     }
-    
-    return res.status(500).json({ 
-      error: { 
+
+    return res.status(500).json({
+      error: {
         message: errorMessage,
         details: process.env.NODE_ENV === 'development' ? error.stack : undefined
-      } 
+      }
     });
   }
 }
