@@ -72,7 +72,8 @@ export default async function handler(req, res) {
       });
     }
 
-    const { name, email, language, fullname } = req.body;
+    const { name, email: rawEmail, language, fullname } = req.body;
+const email = rawEmail?.trim();
 
     // Validate required fields
     if (!name || !email || !language || !fullname) {
