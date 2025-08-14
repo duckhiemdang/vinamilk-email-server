@@ -11,7 +11,7 @@ if (!admin.apps.length) {
       privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     }),
-    databaseURL: 'https://vinamilk-3c5bf-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL: 'https://vinamilk-vform-salestrainee-default-rtdb.asia-southeast1.firebasedatabase.app',
   });
 }
 
