@@ -48,91 +48,100 @@ function buildEmailHtml({ isVietnamese, name, fullname, email }) {
 <html lang="vi">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${subject}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${subject}</title>
 </head>
 
 <body
-  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: white; margin: 0; padding: 20px; color: #333;">
-  <div
-    style="max-width: 600px; margin: auto; background-color: #FFFFF1; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-    <div style="background-color: #0213b0;">
-      <img src="https://vinamilk-email-server.vercel.app/header.png" alt="Sales Trainee 2025"
-        style="width: 100%; max-width: 600px; display: block;" />
-    </div>
-    <div style="padding: 30px;">
-      <p style="font-size: 16px; margin-bottom: 20px;">${name} thân mến,</p>
-      <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-        Cảm ơn bạn đã quan tâm và ứng tuyển vào Chương trình Vinamilk Sales Trainee 2025.
-      </p>
-      <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-        Hồ sơ của bạn đã được ghi nhận trên hệ thống ứng tuyển và hiện đang trong quá trình đánh giá. Kết quả
-        vòng Hồ sơ ứng tuyển sẽ được gửi đến bạn trong khoảng thời gian từ <strong>15–21/09/2025</strong> qua
-        E-mail.
-      </p>
-      <div style="border: 2px solid #0213b0; padding: 20px; margin: 25px 0; border-radius: 4px;">
-        <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #0213b0; font-weight: bold;">
-          Thông tin ứng tuyển</h3>
-        <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
-          <li style="margin-bottom: 8px;"><strong>Họ và Tên:</strong> ${fullname}</li>
-          <li style="margin-bottom: 8px;"><strong>Email:</strong> ${email}</li>
-          <li style="margin-bottom: 0;"><strong>Ngày nộp đơn:</strong> ${submittedDateStr}</li>
-        </ul>
-      </div>
-      <div style="margin: 25px 0;">
-        <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;"><span
-            style="margin-right: 8px;">🔔</span>Vòng tiếp theo</h4>
-        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
-          Các ứng viên vượt qua Vòng 1 – Hồ sơ ứng tuyển sẽ tiếp tục tham gia <strong>Vòng 2 – Kiểm tra năng
-            lực</strong>, dự kiến diễn ra từ ngày <strong>18/09–23/09/2025</strong>. Bạn vui lòng sắp xếp
-          thời gian để tham gia Bài kiểm tra năng lực cùng Vinamilk nhé.
-        </p>
-      </div>
-      <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0;">
-        Nếu có bất kỳ thắc mắc nào, bạn có thể liên hệ chúng mình qua:
-      </p>
-      <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
-        <li style="margin-bottom: 8px;">
-          <strong>Facebook:</strong>
-          <a href="https://www.facebook.com/LifeAtVinamilk" style="color: #0213b0; text-decoration: none;">
-            facebook.com/LifeAtVinamilk
-          </a>
-        </li>
-        <li style="margin-bottom: 0;">
-          <strong>Email:</strong>
-          <a href="mailto:salestrainee@vinamilk.com.vn" style="color: #0213b0; text-decoration: none;">
-            salestrainee@vinamilk.com.vn
-          </a>
-        </li>
-      </ul>
-
-      <p style="font-size: 14px; margin-bottom: 15px;">Khám phá thêm về Nhịp sống Vinamilk tại: Life At Vinamilk
-      </p>
-      <p style="font-size: 14px; margin-bottom: 30px;">Hẹn gặp bạn tại Vinamilk!</p>
-      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
-        <p style="font-size: 14px; margin-bottom: 10px;">Trân trọng,</p>
-        <div style="margin: 20px 0;">
-          <p style="font-size: 14px; margin: 5px 0; font-weight: bold; color: #0213b0;">VINAMILK SALES TRAINEE
-            2025</p>
+    style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: white; margin: 0; padding: 20px; color: #333;">
+    <div
+        style="max-width: 600px; margin: auto; background-color: #FFFFF1; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="background-color: #0213b0;">
+            <img src="https://vinamilk-email-server.vercel.app/header.png" alt="Sales Trainee 2025"
+                style="width: 100%; max-width: 600px; display: block;" />
         </div>
-        <div style="font-size: 12px; color: #777; margin-top: 15px;">
-          <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
-            <li style="margin-bottom: 8px;"><strong>Facebook:</strong> <a
-                href="https://www.facebook.com/LifeAtVinamilk"
-                style="color: #0213b0; text-decoration: none;">facebook.com/LifeAtVinamilk</a></li>
-            <li style="margin-bottom: 8px;"><strong>LinkedIn:</strong> <a
-                href="https://www.linkedin.com/company/vinamilk"
-                style="color: #0213b0; text-decoration: none;">linkedin.com/company/vinamilk</a></li>
-            <li style="margin-bottom: 0;"><strong>Email:</strong> <a
-                href="mailto:salestrainee@vinamilk.com.vn"
-                style="color: #0213b0; text-decoration: none;">salestrainee@vinamilk.com.vn</a></li>
-          </ul>
+        <div style="padding: 30px;">
+            <p style="font-size: 16px; margin-bottom: 20px;">${name} thân mến,</p>
+            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                Cảm ơn bạn đã quan tâm và ứng tuyển vào Chương trình Vinamilk Sales Trainee 2025.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                Hồ sơ của bạn đã được ghi nhận trên hệ thống ứng tuyển và hiện đang trong quá trình đánh giá.
+                Kết quả vòng Hồ sơ ứng tuyển sẽ được gửi đến bạn trong khoảng thời gian từ
+                <strong style="color: #0213b0;">15 – 21/09/2025</strong>
+                qua E-mail.
+            </p>
 
+            <div style="border: 2px solid #0213b0; padding: 20px; margin: 25px 0; border-radius: 4px;">
+                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #0213b0; font-weight: bold;">
+                    Thông tin ứng tuyển</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+                    <li style="margin-bottom: 8px;"><strong>Họ và Tên:</strong> ${fullname}</li>
+                    <li style="margin-bottom: 8px;"><strong>Email:</strong> ${email}</li>
+                    <li style="margin-bottom: 0;"><strong>Ngày nộp đơn:</strong> ${submittedDateStr}</li>
+                </ul>
+            </div>
+            <div style="margin: 25px 0;">
+                <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;"><span
+                        style="margin-right: 8px;">🔔</span>Vòng tiếp theo</h4>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
+                    Các ứng viên vượt qua Vòng 1 – Hồ sơ ứng tuyển sẽ tiếp tục tham gia Vòng 2 – Kiểm tra năng
+                    lực, dự kiến diễn ra từ ngày <strong>18/09 – 23/09</strong>. Bạn vui lòng sắp xếp
+                    thời gian để tham gia Bài kiểm tra năng lực cùng Vinamilk nhé.
+                </p>
+            </div>
+            <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0; font-weight: bold;">
+                Nếu có bất kỳ thắc mắc nào, bạn có thể liên hệ chúng mình qua:
+            </p>
+
+            <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">
+                    <strong>Facebook:</strong>
+                    <a href="https://www.facebook.com/LifeAtVinamilk" style="color: #0213b0; text-decoration: none;">
+                        facebook.com/LifeAtVinamilk
+                    </a>
+                </li>
+                <li style="margin-bottom: 0;">
+                    <strong>Email:</strong>
+                    <a href="mailto:salestrainee@vinamilk.com.vn" style="color: #0213b0; text-decoration: none;">
+                        salestrainee@vinamilk.com.vn
+                    </a>
+                </li>
+            </ul>
+
+            <p style="font-size: 14px; margin-bottom: 15px;">
+                Khám phá thêm về Nhịp sống Vinamilk tại:
+                <a href="https://www.facebook.com/LifeAtVinamilk" style="color: #0213b0; text-decoration: none;">
+                    Life At Vinamilk
+                </a>
+            </p>
+
+            </p>
+            <p style="font-size: 14px; margin-bottom: 30px;">Hẹn gặp bạn tại Vinamilk!</p>
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 14px; margin-bottom: 10px;">Trân trọng,</p>
+                <div style="margin: 20px 0;">
+                    <p style="font-size: 14px; margin: 5px 0; font-weight: bold; color: #0213b0;">VINAMILK SALES TRAINEE
+                        2025</p>
+                </div>
+                <div style="font-size: 12px; color: #777; margin-top: 15px;">
+                    <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
+                        <li style="margin-bottom: 8px;"><strong>Facebook:</strong> <a
+                                href="https://www.facebook.com/LifeAtVinamilk"
+                                style="color: #0213b0; text-decoration: none;">facebook.com/LifeAtVinamilk</a></li>
+                        <li style="margin-bottom: 8px;"><strong>LinkedIn:</strong> <a
+                                href="https://www.linkedin.com/company/vinamilk"
+                                style="color: #0213b0; text-decoration: none;">linkedin.com/company/vinamilk</a></li>
+                        <li style="margin-bottom: 0;"><strong>Email:</strong> <a
+                                href="mailto:salestrainee@vinamilk.com.vn"
+                                style="color: #0213b0; text-decoration: none;">salestrainee@vinamilk.com.vn</a></li>
+                    </ul>
+
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </body>
 
 </html>
@@ -164,8 +173,10 @@ const en = `
       </p>
       <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
         Your application has been recorded in our system and is under review. Results of the Application round will be
-        sent to you by E-mail between <strong>September 15–21, 2025</strong>.
+        sent to you by E-mail between 
+        <strong style="color: #0213b0;">September 15–21, 2025</strong>.
       </p>
+
       <div style="border: 2px solid #0213b0; padding: 20px; margin: 25px 0; border-radius: 4px;">
         <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #0213b0; font-weight: bold;">Application Information</h3>
         <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
@@ -174,18 +185,23 @@ const en = `
           <li style="margin-bottom: 0;"><strong>Submitted Date:</strong> ${submittedDateStr}</li>
         </ul>
       </div>
+
       <div style="margin: 25px 0;">
-        <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;"><span
-            style="margin-right: 8px;">🔔</span>Next Round</h4>
+        <h4 style="margin-bottom: 15px; font-size: 14px; color: #333;">
+          <span style="margin-right: 8px;">🔔</span>Next Round
+        </h4>
         <p style="font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
-          Candidates who pass Round 1 – Application will proceed to <strong>Round 2 – Aptitude Test</strong>,
-          tentatively scheduled for <strong>September 18–23, 2025</strong>. Please arrange your time to participate in
-          the Aptitude Test with Vinamilk.
+          Candidates who pass Round 1 – Application will proceed to 
+          <strong>Round 2 – Aptitude Test</strong>, tentatively scheduled for 
+          <strong style="color: #0213b0;">September 18–23, 2025</strong>. 
+          Please arrange your time to participate in the Aptitude Test with Vinamilk.
         </p>
       </div>
-      <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0;">
+
+      <p style="font-size: 14px; line-height: 1.6; margin: 25px 0 15px 0; font-weight: bold;">
         If you have any questions, contact us via:
       </p>
+
       <ul style="font-size: 14px; margin: 0 0 25px 0; padding-left: 20px;">
         <li style="margin-bottom: 8px;">
           <strong>Facebook:</strong>
@@ -201,8 +217,15 @@ const en = `
         </li>
       </ul>
 
-      <p style="font-size: 14px; margin-bottom: 15px;">Discover more about Life at Vinamilk: Life At Vinamilk</p>
+      <p style="font-size: 14px; margin-bottom: 15px;">
+        Discover more about Life at Vinamilk: 
+        <a href="https://www.facebook.com/LifeAtVinamilk" style="color: #0213b0; text-decoration: none;">
+          Life At Vinamilk
+        </a>
+      </p>
+
       <p style="font-size: 14px; margin-bottom: 30px;">See you at Vinamilk!</p>
+
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
         <p style="font-size: 14px; margin-bottom: 10px;">Best regards,</p>
         <div style="margin: 20px 0;">
@@ -228,6 +251,7 @@ const en = `
 
 </html>
 `;
+
 
 
   return {
